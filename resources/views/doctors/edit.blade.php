@@ -1,0 +1,61 @@
+@extends('layouts.layout')
+
+@section('title', 'تعديل بيانات الطبيب')
+
+@section('content')
+    <div class="container">
+        <h2 class="text-center my-4">تعديل بيانات الطبيب</h2>
+
+        <div class="card p-4 shadow-lg">
+            <form action="{{ route('doctors.update', $doctor->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label class="form-label">الاسم الأول:</label>
+                    <input type="text" name="first_name" class="form-control" value="{{ old('first_name', $doctor->first_name) }}" required>
+                    @error('first_name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">الاسم الأخير:</label>
+                    <input type="text" name="last_name" class="form-control" value="{{ old('last_name', $doctor->last_name) }}" required>
+                    @error('last_name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">التخصص:</label>
+                    <input type="text" name="specialization" class="form-control" value="{{ old('specialization', $doctor->specialization) }}" required>
+                    @error('specialization')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">البريد الإلكتروني:</label>
+                    <input type="email" name="email" class="form-control" value="{{ old('email', $doctor->email) }}" required>
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">رقم الهاتف:</label>
+                    <input type="text" name="phone_number" class="form-control" value="{{ old('phone_number', $doctor->phone_number) }}" required>
+                    @error('phone_number')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">تحديث</button>
+                    <a href="{{ route('doctors.index') }}" class="btn btn-secondary">إلغاء</a>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
